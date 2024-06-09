@@ -1,3 +1,5 @@
+import 'package:communi_app/core/common/functions/show_snackbar.dart';
+import 'package:communi_app/core/common/widgets/loader.dart';
 import 'package:communi_app/core/utils/asset_manager.dart';
 import 'package:communi_app/core/utils/string_manager.dart';
 import 'package:communi_app/features/authentication/presentation/bloc/auth_bloc.dart';
@@ -54,135 +56,150 @@ class _SignUpPageState extends State<SignUpPage> {
             ),
 
             // Sign In Contents
-            Form(
-              key: formKey,
-              child: Column(
-                children: [
-                  // App Name
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: Padding(
-                      padding: EdgeInsets.only(right: 20),
-                      child: Text(
-                        StringManager.appName,
-                        style: Theme.of(context).textTheme.headlineLarge,
+            BlocConsumer<AuthBloc, AuthState>(
+              listener: (context, state) {
+                if (state is AuthFailure) {
+                  showSnackBar(context, state.message);
+                }
+              },
+              builder: (context, state) {
+                if (state is AuthLoading) {
+                  return Loader();
+                }
+                return Form(
+                  key: formKey,
+                  child: Column(
+                    children: [
+                      // App Name
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: Padding(
+                          padding: EdgeInsets.only(right: 20),
+                          child: Text(
+                            StringManager.appName,
+                            style: Theme.of(context).textTheme.headlineLarge,
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
 
-                  // Sized box
-                  SizedBox(
-                    height: 50,
-                  ),
-
-                  // Sign up title
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 20),
-                      child: Text(
-                        StringManager.signUp,
-                        style: Theme.of(context).textTheme.headlineMedium,
+                      // Sized box
+                      SizedBox(
+                        height: 50,
                       ),
-                    ),
-                  ),
 
-                  // Sized box
-                  SizedBox(
-                    height: 30,
-                  ),
+                      // Sign up title
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 20),
+                          child: Text(
+                            StringManager.signUp,
+                            style: Theme.of(context).textTheme.headlineMedium,
+                          ),
+                        ),
+                      ),
 
-                  // Input username
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 50),
-                    child: AuthField(
-                      hintText: StringManager.username,
-                      textEditingController: usernameController,
-                    ),
-                  ),
+                      // Sized box
+                      SizedBox(
+                        height: 30,
+                      ),
 
-                  // Sized box
-                  SizedBox(
-                    height: 30,
-                  ),
+                      // Input username
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 50),
+                        child: AuthField(
+                          hintText: StringManager.username,
+                          textEditingController: usernameController,
+                        ),
+                      ),
 
-                  // Input email
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 50),
-                    child: AuthField(
-                      hintText: StringManager.email,
-                      textEditingController: emailController,
-                    ),
-                  ),
+                      // Sized box
+                      SizedBox(
+                        height: 30,
+                      ),
 
-                  // Sized box
-                  SizedBox(
-                    height: 30,
-                  ),
+                      // Input email
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 50),
+                        child: AuthField(
+                          hintText: StringManager.email,
+                          textEditingController: emailController,
+                        ),
+                      ),
 
-                  // Input password
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 50),
-                    child: AuthField(
-                      hintText: StringManager.password,
-                      textEditingController: passwordController,
-                      isObscure: true,
-                    ),
-                  ),
+                      // Sized box
+                      SizedBox(
+                        height: 30,
+                      ),
 
-                  // Sized box
-                  SizedBox(
-                    height: 30,
-                  ),
+                      // Input password
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 50),
+                        child: AuthField(
+                          hintText: StringManager.password,
+                          textEditingController: passwordController,
+                          isObscure: true,
+                        ),
+                      ),
 
-                  // Input confirm password
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 50),
-                    child: AuthField(
-                      hintText: StringManager.confirmPassword,
-                      textEditingController: confirmController,
-                      isObscure: true,
-                    ),
-                  ),
+                      // Sized box
+                      SizedBox(
+                        height: 30,
+                      ),
 
-                  // Sized box
-                  SizedBox(
-                    height: 50,
-                  ),
+                      // Input confirm password
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 50),
+                        child: AuthField(
+                          hintText: StringManager.confirmPassword,
+                          textEditingController: confirmController,
+                          isObscure: true,
+                        ),
+                      ),
 
-                  // Sign Up button
-                  RoundedButton(
-                    buttonText: StringManager.signUp,
-                    onTap: () {
-                      if (formKey.currentState!.validate()) {
-                        String password = passwordController.text;
-                        String confirmPassword = confirmController.text;
+                      // Sized box
+                      SizedBox(
+                        height: 50,
+                      ),
 
-                        if (password == confirmPassword) {
-                          context.read<AuthBloc>().add(AuthSignUp(
-                                username: usernameController.text.trim(),
-                                email: emailController.text.trim(),
-                                password: password,
-                              ));
-                        }
-                      }
-                    },
-                  ),
+                      // Sign Up button
+                      RoundedButton(
+                        buttonText: StringManager.signUp,
+                        onTap: () {
+                          if (formKey.currentState!.validate()) {
+                            String password = passwordController.text;
+                            String confirmPassword = confirmController.text;
 
-                  // Sized box
-                  SizedBox(
-                    height: 10,
-                  ),
+                            if (password == confirmPassword) {
+                              context.read<AuthBloc>().add(AuthSignUp(
+                                    username: usernameController.text.trim(),
+                                    email: emailController.text.trim(),
+                                    password: password,
+                                  ));
+                            } else {
+                              showSnackBar(context,
+                                  "You must confirm the same password.");
+                            }
+                          }
+                        },
+                      ),
 
-                  // Back button
-                  RoundedBackButton(
-                    buttonText: StringManager.back,
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
+                      // Sized box
+                      SizedBox(
+                        height: 10,
+                      ),
+
+                      // Back button
+                      RoundedBackButton(
+                        buttonText: StringManager.back,
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                );
+              },
             )
           ],
         ),

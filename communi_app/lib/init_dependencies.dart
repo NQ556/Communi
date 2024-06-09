@@ -2,6 +2,7 @@ import 'package:communi_app/env/env.dart';
 import 'package:communi_app/features/authentication/data/datasources/auth_data_source.dart';
 import 'package:communi_app/features/authentication/data/repository/auth_repository_impl.dart';
 import 'package:communi_app/features/authentication/domain/repository/auth_repository.dart';
+import 'package:communi_app/features/authentication/domain/usecase/user_sign_in.dart';
 import 'package:communi_app/features/authentication/domain/usecase/user_sign_up.dart';
 import 'package:communi_app/features/authentication/presentation/bloc/auth_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -38,9 +39,16 @@ void _initAuth() {
     ),
   );
 
+  getIt.registerFactory(
+    () => UserSignIn(
+      getIt(),
+    ),
+  );
+
   getIt.registerLazySingleton(
     () => AuthBloc(
       userSignUp: getIt(),
+      userSignIn: getIt(),
     ),
   );
 }

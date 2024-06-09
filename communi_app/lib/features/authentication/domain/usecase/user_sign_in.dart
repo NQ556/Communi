@@ -2,29 +2,26 @@ import 'package:communi_app/core/error/failure.dart';
 import 'package:communi_app/core/usecase/usecase.dart';
 import 'package:communi_app/features/authentication/domain/entities/user.dart';
 import 'package:communi_app/features/authentication/domain/repository/auth_repository.dart';
-import 'package:fpdart/fpdart.dart';
+import 'package:fpdart/src/either.dart';
 
-class UserSignUp implements Usecase<User, UserSignUpParams> {
+class UserSignIn implements Usecase<User, UserSignInParams> {
   final AuthRepository authRepository;
-  UserSignUp(this.authRepository);
+  UserSignIn(this.authRepository);
 
   @override
-  Future<Either<Failure, User>> call(UserSignUpParams params) async {
-    return await authRepository.signUpWithEmail(
-      username: params.username,
+  Future<Either<Failure, User>> call(UserSignInParams params) async {
+    return await authRepository.signInWithEmail(
       email: params.email,
       password: params.password,
     );
   }
 }
 
-class UserSignUpParams {
-  final String username;
+class UserSignInParams {
   final String email;
   final String password;
 
-  UserSignUpParams({
-    required this.username,
+  UserSignInParams({
     required this.email,
     required this.password,
   });
