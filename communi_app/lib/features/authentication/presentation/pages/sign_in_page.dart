@@ -17,14 +17,14 @@ class SignInPage extends StatefulWidget {
 class _SignInPageState extends State<SignInPage> {
   final formKey = GlobalKey<FormState>();
 
-  final phoneNumberController = TextEditingController();
+  final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
   @override
   void dispose() {
     super.dispose();
 
-    phoneNumberController.dispose();
+    emailController.dispose();
     passwordController.dispose();
   }
 
@@ -87,12 +87,12 @@ class _SignInPageState extends State<SignInPage> {
                     height: 30,
                   ),
 
-                  // Input phone number
+                  // Input email
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 50),
                     child: AuthField(
-                      hintText: StringManager.phoneNumber,
-                      textEditingController: phoneNumberController,
+                      hintText: StringManager.email,
+                      textEditingController: emailController,
                     ),
                   ),
 

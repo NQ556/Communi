@@ -1,7 +1,7 @@
 class StringManager {
   static const String appName = "Communi";
   static const String signIn = "Sign In";
-  static const String phoneNumber = "Phone number";
+  static const String email = "Email";
   static const String password = "Password";
   static const String forgotPassword = "Forgot password?";
   static const String or = "OR";

@@ -1,9 +1,11 @@
 import 'package:communi_app/core/utils/asset_manager.dart';
 import 'package:communi_app/core/utils/string_manager.dart';
+import 'package:communi_app/features/authentication/presentation/bloc/auth_bloc.dart';
 import 'package:communi_app/features/authentication/presentation/widgets/auth_field.dart';
 import 'package:communi_app/features/authentication/presentation/widgets/rounded_back_button.dart';
 import 'package:communi_app/features/authentication/presentation/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -17,7 +19,7 @@ class _SignUpPageState extends State<SignUpPage> {
   final formKey = GlobalKey<FormState>();
 
   final usernameController = TextEditingController();
-  final phoneNumberController = TextEditingController();
+  final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmController = TextEditingController();
 
@@ -26,7 +28,7 @@ class _SignUpPageState extends State<SignUpPage> {
     super.dispose();
 
     usernameController.dispose();
-    phoneNumberController.dispose();
+    emailController.dispose();
     passwordController.dispose();
     confirmController.dispose();
   }
@@ -104,12 +106,12 @@ class _SignUpPageState extends State<SignUpPage> {
                     height: 30,
                   ),
 
-                  // Input phone number
+                  // Input email
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 50),
                     child: AuthField(
-                      hintText: StringManager.phoneNumber,
-                      textEditingController: phoneNumberController,
+                      hintText: StringManager.email,
+                      textEditingController: emailController,
                     ),
                   ),
 
@@ -151,7 +153,20 @@ class _SignUpPageState extends State<SignUpPage> {
                   // Sign Up button
                   RoundedButton(
                     buttonText: StringManager.signUp,
-                    onTap: () {},
+                    onTap: () {
+                      if (formKey.currentState!.validate()) {
+                        String password = passwordController.text;
+                        String confirmPassword = confirmController.text;
+
+                        if (password == confirmPassword) {
+                          context.read<AuthBloc>().add(AuthSignUp(
+                                username: usernameController.text.trim(),
+                                email: emailController.text.trim(),
+                                password: password,
+                              ));
+                        }
+                      }
+                    },
                   ),
 
                   // Sized box
