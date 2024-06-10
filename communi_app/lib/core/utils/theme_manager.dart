@@ -32,6 +32,11 @@ ThemeData getApplicationTheme() {
           fontFamily: FontFamilyConstants.fontFamily_2,
           fontSize: 18,
           color: ColorManager.primary),
+      bodyMedium: TextStyle(
+          fontFamily: FontFamilyConstants.fontFamily_2,
+          fontWeight: FontWeightManager.bold,
+          fontSize: 24,
+          color: Colors.black),
     ),
 
     // Input decoration theme

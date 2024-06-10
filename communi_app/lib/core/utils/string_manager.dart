@@ -13,4 +13,9 @@ class StringManager {
   static const String username = "Username";
   static const String confirmPassword = "Confirm password";
   static const String back = "Back";
+
+  static const String enter = "Enter here";
+  static const String createChatRoom = "Create Chat Room";
+  static const String enterChatRoom = "Enter name here";
+  static const String create = "Create";
 }

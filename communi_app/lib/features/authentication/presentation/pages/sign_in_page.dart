@@ -6,7 +6,7 @@ import 'package:communi_app/core/utils/string_manager.dart';
 import 'package:communi_app/features/authentication/presentation/bloc/auth_bloc.dart';
 import 'package:communi_app/features/authentication/presentation/widgets/auth_field.dart';
 import 'package:communi_app/features/authentication/presentation/widgets/custom_text_button.dart';
-import 'package:communi_app/features/authentication/presentation/widgets/rounded_button.dart';
+import 'package:communi_app/core/common/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
