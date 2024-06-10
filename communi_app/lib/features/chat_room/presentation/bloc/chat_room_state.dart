@@ -13,3 +13,8 @@ final class ChatRoomFailure extends ChatRoomState {
 }
 
 final class ChatRoomSuccess extends ChatRoomState {}
+
+final class ChatRoomDisplaySuccess extends ChatRoomState {
+  final List<ChatRoom> chatRooms;
+  ChatRoomDisplaySuccess(this.chatRooms);
+}

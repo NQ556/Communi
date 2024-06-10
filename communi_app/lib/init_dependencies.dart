@@ -11,6 +11,7 @@ import 'package:communi_app/features/chat_room/data/datasources/chat_room_data_s
 import 'package:communi_app/features/chat_room/data/repository/chat_room_repository_impl.dart';
 import 'package:communi_app/features/chat_room/domain/repository/chat_room_repository.dart';
 import 'package:communi_app/features/chat_room/domain/usecase/add_chat_room.dart';
+import 'package:communi_app/features/chat_room/domain/usecase/get_all_chat_rooms.dart';
 import 'package:communi_app/features/chat_room/presentation/bloc/chat_room_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -91,9 +92,16 @@ void _initChatRoom() {
     ),
   );
 
+  getIt.registerFactory(
+    () => GetAllChatRooms(
+      getIt(),
+    ),
+  );
+
   getIt.registerLazySingleton(
     () => ChatRoomBloc(
-      getIt(),
+      addChatRoom: getIt(),
+      getAllChatRooms: getIt(),
     ),
   );
 }

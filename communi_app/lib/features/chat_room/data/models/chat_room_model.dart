@@ -6,6 +6,7 @@ class ChatRoomModel extends ChatRoom {
     required super.id,
     required super.userId,
     required super.name,
+    super.creatorName,
   });
 
   Map<String, dynamic> toMap() {
@@ -28,4 +29,18 @@ class ChatRoomModel extends ChatRoom {
 
   factory ChatRoomModel.fromJson(String source) =>
       ChatRoomModel.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  ChatRoomModel copyWith({
+    String? id,
+    String? userId,
+    String? name,
+    String? creatorName,
+  }) {
+    return ChatRoomModel(
+      id: id ?? this.id,
+      userId: userId ?? this.userId,
+      name: name ?? this.name,
+      creatorName: creatorName ?? this.creatorName,
+    );
+  }
 }

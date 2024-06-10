@@ -7,4 +7,6 @@ abstract interface class ChatRoomRepository {
     required String userId,
     required String name,
   });
+
+  Future<Either<Failure, List<ChatRoom>>> getAllChatRooms();
 }

@@ -27,4 +27,14 @@ class ChatRoomRepositoryImpl implements ChatRoomRepository {
       return left(Failure(e.message));
     }
   }
+
+  @override
+  Future<Either<Failure, List<ChatRoom>>> getAllChatRooms() async {
+    try {
+      final chatRooms = await chatRoomDataSource.getAllChatRooms();
+      return right(chatRooms);
+    } on ServerException catch (e) {
+      return left(Failure(e.message));
+    }
+  }
 }

@@ -4,6 +4,7 @@ class ColorManager {
   static Color primary = HexColor.fromHex("#006C79");
   static Color primary50 = primary.withOpacity(0.5);
   static Color white50 = Colors.white.withOpacity(0.5);
+  static Color lightGreen = HexColor.fromHex("#C7E9E3");
 }
 
 extension HexColor on Color {

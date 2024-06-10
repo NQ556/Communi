@@ -12,3 +12,5 @@ final class ChatRoomAdd extends ChatRoomEvent {
     required this.name,
   });
 }
+
+final class FetchAllChatRooms extends ChatRoomEvent {}

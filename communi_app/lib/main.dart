@@ -56,7 +56,7 @@ class _MyAppState extends State<MyApp> {
         },
         builder: (context, isSignedIn) {
           if (isSignedIn) {
-            return AddChatRoomPage();
+            return HomePage();
           }
 
           return SignInPage();

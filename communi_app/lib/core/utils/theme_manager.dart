@@ -28,6 +28,10 @@ ThemeData getApplicationTheme() {
           fontFamily: FontFamilyConstants.fontFamily_2,
           fontSize: 40,
           color: ColorManager.primary),
+      headlineSmall: TextStyle(
+          fontFamily: FontFamilyConstants.fontFamily_1,
+          fontSize: 40,
+          color: ColorManager.primary),
       bodySmall: TextStyle(
           fontFamily: FontFamilyConstants.fontFamily_2,
           fontSize: 18,
