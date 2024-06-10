@@ -1,7 +1,7 @@
 import 'package:communi_app/core/error/exception.dart';
 import 'package:communi_app/core/error/failure.dart';
 import 'package:communi_app/features/authentication/data/datasources/auth_data_source.dart';
-import 'package:communi_app/features/authentication/domain/entities/user.dart';
+import 'package:communi_app/core/common/entities/user.dart';
 import 'package:communi_app/features/authentication/domain/repository/auth_repository.dart';
 import 'package:fpdart/fpdart.dart';
 
@@ -39,6 +39,21 @@ class AuthRepositoryImpl implements AuthRepository {
   ) async {
     try {
       final user = await function();
+      return right(user);
+    } on ServerException catch (e) {
+      return left(Failure(e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, User>> currentUser() async {
+    try {
+      final user = await authDataSource.getCurrentUserData();
+
+      if (user == null) {
+        return left(Failure("User not sign in"));
+      }
+
       return right(user);
     } on ServerException catch (e) {
       return left(Failure(e.message));

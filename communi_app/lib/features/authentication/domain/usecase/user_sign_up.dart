@@ -1,6 +1,6 @@
 import 'package:communi_app/core/error/failure.dart';
 import 'package:communi_app/core/usecase/usecase.dart';
-import 'package:communi_app/features/authentication/domain/entities/user.dart';
+import 'package:communi_app/core/common/entities/user.dart';
 import 'package:communi_app/features/authentication/domain/repository/auth_repository.dart';
 import 'package:fpdart/fpdart.dart';
 
