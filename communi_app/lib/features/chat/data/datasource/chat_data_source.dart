@@ -32,9 +32,6 @@ class ChatDataSourceImpl extends ChatDataSource {
           .select('*, profiles (username)')
           .eq('chat_room_id', chatRoomId);
 
-      print("_____________");
-      print(chatRooms.length);
-
       return chatRooms
           .map(
             (chatRoom) => MessageModel.fromMap(chatRoom).copyWith(

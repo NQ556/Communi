@@ -173,7 +173,8 @@ class _SignInPageState extends State<SignInPage> {
                           CustomTextButton(
                             text: StringManager.signUp,
                             onTap: () {
-                              Navigator.pushNamed(context, Routes.signUpRoute);
+                              Navigator.pushReplacementNamed(
+                                  context, Routes.signUpRoute);
                             },
                           ),
                         ],

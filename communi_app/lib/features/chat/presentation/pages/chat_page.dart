@@ -61,7 +61,9 @@ class _ChatPageState extends State<ChatPage> {
                     children: [
                       // Back button
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
                         icon: Icon(
                           Icons.arrow_back_ios_outlined,
                           size: 30,

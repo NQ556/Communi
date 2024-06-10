@@ -46,7 +46,10 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       // Back button
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context)
+                              .pushReplacementNamed(Routes.signInRoute);
+                        },
                         icon: Icon(
                           Icons.arrow_back_ios_outlined,
                           size: 30,
