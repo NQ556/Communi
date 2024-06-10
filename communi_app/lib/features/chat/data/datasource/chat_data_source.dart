@@ -4,7 +4,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 abstract interface class ChatDataSource {
   Future<MessageModel> sendMessage(MessageModel message);
-  //Future<List<ChatRoomModel>> getAllChatRooms();
+  Future<List<MessageModel>> getAllMessages(String chatRoomId);
 }
 
 class ChatDataSourceImpl extends ChatDataSource {
@@ -19,6 +19,29 @@ class ChatDataSourceImpl extends ChatDataSource {
           .insert(message.toMap())
           .select();
       return MessageModel.fromMap(messageData.first);
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+
+  @override
+  Future<List<MessageModel>> getAllMessages(String chatRoomId) async {
+    try {
+      final chatRooms = await supabaseClient
+          .from('messages')
+          .select('*, profiles (username)')
+          .eq('chat_room_id', chatRoomId);
+
+      print("_____________");
+      print(chatRooms.length);
+
+      return chatRooms
+          .map(
+            (chatRoom) => MessageModel.fromMap(chatRoom).copyWith(
+              username: chatRoom['profiles']['username'],
+            ),
+          )
+          .toList();
     } catch (e) {
       throw ServerException(e.toString());
     }

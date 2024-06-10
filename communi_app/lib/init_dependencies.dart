@@ -10,6 +10,7 @@ import 'package:communi_app/features/authentication/presentation/bloc/auth_bloc.
 import 'package:communi_app/features/chat/data/datasource/chat_data_source.dart';
 import 'package:communi_app/features/chat/data/repository/message_repository_impl.dart';
 import 'package:communi_app/features/chat/domain/repository/message_repository.dart';
+import 'package:communi_app/features/chat/domain/usecase/get_all_messages.dart';
 import 'package:communi_app/features/chat/domain/usecase/send_message.dart';
 import 'package:communi_app/features/chat/presentation/bloc/message_bloc.dart';
 import 'package:communi_app/features/chat_room/data/datasources/chat_room_data_source.dart';
@@ -131,15 +132,16 @@ void _initMessage() {
     ),
   );
 
-  // getIt.registerFactory(
-  //   () => GetAllChatRooms(
-  //     getIt(),
-  //   ),
-  // );
+  getIt.registerFactory(
+    () => GetAllMessages(
+      getIt(),
+    ),
+  );
 
   getIt.registerLazySingleton(
     () => MessageBloc(
       sendMessage: getIt(),
+      getAllMessages: getIt(),
     ),
   );
 }

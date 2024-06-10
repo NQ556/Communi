@@ -14,3 +14,11 @@ final class MessageAdd extends MessageEvent {
     required this.message,
   });
 }
+
+final class FetchAllMessages extends MessageEvent {
+  final String chatRoomId;
+
+  FetchAllMessages({
+    required this.chatRoomId,
+  });
+}

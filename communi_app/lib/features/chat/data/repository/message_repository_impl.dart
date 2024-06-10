@@ -31,4 +31,15 @@ class MessageRepositoryImpl implements MessageRepository {
       return left(Failure(e.message));
     }
   }
+
+  @override
+  Future<Either<Failure, List<Message>>> getAllMessages(
+      {required String chatRoomId}) async {
+    try {
+      final messages = await chatDataSource.getAllMessages(chatRoomId);
+      return right(messages);
+    } on ServerException catch (e) {
+      return left(Failure(e.message));
+    }
+  }
 }

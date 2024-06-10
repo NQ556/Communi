@@ -8,6 +8,7 @@ class MessageModel extends Message {
     required super.userId,
     required super.chatRoomId,
     required super.message,
+    super.username,
   });
 
   Map<String, dynamic> toMap() {
@@ -32,4 +33,20 @@ class MessageModel extends Message {
 
   factory MessageModel.fromJson(String source) =>
       MessageModel.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  MessageModel copyWith({
+    String? id,
+    String? userId,
+    String? chatRoomId,
+    String? message,
+    String? username,
+  }) {
+    return MessageModel(
+      id: id ?? this.id,
+      userId: userId ?? this.userId,
+      chatRoomId: chatRoomId ?? this.chatRoomId,
+      message: message ?? this.message,
+      username: username ?? this.username,
+    );
+  }
 }

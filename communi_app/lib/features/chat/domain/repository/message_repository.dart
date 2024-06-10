@@ -8,4 +8,7 @@ abstract interface class MessageRepository {
     required String chatRoomId,
     required String message,
   });
+
+  Future<Either<Failure, List<Message>>> getAllMessages(
+      {required String chatRoomId});
 }

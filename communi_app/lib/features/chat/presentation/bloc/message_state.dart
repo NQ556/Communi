@@ -11,3 +11,8 @@ final class MessageFailure extends MessageState {
 }
 
 final class MessageSuccess extends MessageState {}
+
+final class MessageDisplaySuccess extends MessageState {
+  final List<Message> messages;
+  MessageDisplaySuccess(this.messages);
+}
