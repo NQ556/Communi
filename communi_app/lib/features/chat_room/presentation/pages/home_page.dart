@@ -1,5 +1,6 @@
 import 'package:communi_app/core/common/functions/show_snackbar.dart';
 import 'package:communi_app/core/common/widgets/loader.dart';
+import 'package:communi_app/core/utils/route_manager.dart';
 import 'package:communi_app/core/utils/string_manager.dart';
 import 'package:communi_app/features/chat_room/presentation/bloc/chat_room_bloc.dart';
 import 'package:communi_app/features/chat_room/presentation/widgets/chat_room_box.dart';
@@ -78,8 +79,15 @@ class _HomePageState extends State<HomePage> {
                         return Padding(
                           padding: EdgeInsets.symmetric(horizontal: 20),
                           child: ChatRoomBox(
-                              name: state.chatRooms[index].name,
-                              creator: state.chatRooms[index].creatorName!),
+                            name: state.chatRooms[index].name,
+                            creator: state.chatRooms[index].creatorName!,
+                            onTap: () {
+                              Navigator.of(context).pushNamed(
+                                Routes.chatRoute,
+                                arguments: state.chatRooms[index],
+                              );
+                            },
+                          ),
                         );
                       },
                     ),

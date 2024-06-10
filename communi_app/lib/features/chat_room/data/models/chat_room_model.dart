@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:communi_app/features/chat_room/domain/entities/chat_room.dart';
+import 'package:communi_app/core/common/entities/chat_room.dart';
 
 class ChatRoomModel extends ChatRoom {
   ChatRoomModel({

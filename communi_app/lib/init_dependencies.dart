@@ -7,6 +7,11 @@ import 'package:communi_app/features/authentication/domain/usecase/current_user.
 import 'package:communi_app/features/authentication/domain/usecase/user_sign_in.dart';
 import 'package:communi_app/features/authentication/domain/usecase/user_sign_up.dart';
 import 'package:communi_app/features/authentication/presentation/bloc/auth_bloc.dart';
+import 'package:communi_app/features/chat/data/datasource/chat_data_source.dart';
+import 'package:communi_app/features/chat/data/repository/message_repository_impl.dart';
+import 'package:communi_app/features/chat/domain/repository/message_repository.dart';
+import 'package:communi_app/features/chat/domain/usecase/send_message.dart';
+import 'package:communi_app/features/chat/presentation/bloc/message_bloc.dart';
 import 'package:communi_app/features/chat_room/data/datasources/chat_room_data_source.dart';
 import 'package:communi_app/features/chat_room/data/repository/chat_room_repository_impl.dart';
 import 'package:communi_app/features/chat_room/domain/repository/chat_room_repository.dart';
@@ -21,6 +26,7 @@ final getIt = GetIt.instance;
 Future<void> initDependencies() async {
   _initAuth();
   _initChatRoom();
+  _initMessage();
 
   final supabase = await Supabase.initialize(
     url: Env.url,
@@ -102,6 +108,38 @@ void _initChatRoom() {
     () => ChatRoomBloc(
       addChatRoom: getIt(),
       getAllChatRooms: getIt(),
+    ),
+  );
+}
+
+void _initMessage() {
+  getIt.registerFactory<ChatDataSource>(
+    () => ChatDataSourceImpl(
+      getIt(),
+    ),
+  );
+
+  getIt.registerFactory<MessageRepository>(
+    () => MessageRepositoryImpl(
+      getIt(),
+    ),
+  );
+
+  getIt.registerFactory(
+    () => SendMessage(
+      getIt(),
+    ),
+  );
+
+  // getIt.registerFactory(
+  //   () => GetAllChatRooms(
+  //     getIt(),
+  //   ),
+  // );
+
+  getIt.registerLazySingleton(
+    () => MessageBloc(
+      sendMessage: getIt(),
     ),
   );
 }

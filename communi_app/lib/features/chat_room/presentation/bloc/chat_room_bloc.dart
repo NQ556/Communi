@@ -1,5 +1,5 @@
 import 'package:communi_app/core/usecase/usecase.dart';
-import 'package:communi_app/features/chat_room/domain/entities/chat_room.dart';
+import 'package:communi_app/core/common/entities/chat_room.dart';
 import 'package:communi_app/features/chat_room/domain/usecase/add_chat_room.dart';
 import 'package:communi_app/features/chat_room/domain/usecase/get_all_chat_rooms.dart';
 import 'package:flutter/material.dart';

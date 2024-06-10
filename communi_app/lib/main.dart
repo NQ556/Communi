@@ -3,6 +3,7 @@ import 'package:communi_app/core/utils/route_manager.dart';
 import 'package:communi_app/core/utils/theme_manager.dart';
 import 'package:communi_app/features/authentication/presentation/bloc/auth_bloc.dart';
 import 'package:communi_app/features/authentication/presentation/pages/sign_in_page.dart';
+import 'package:communi_app/features/chat/presentation/bloc/message_bloc.dart';
 import 'package:communi_app/features/chat/presentation/pages/chat_page.dart';
 import 'package:communi_app/features/chat_room/presentation/bloc/chat_room_bloc.dart';
 import 'package:communi_app/features/chat_room/presentation/pages/add_chat_room_page.dart';
@@ -25,6 +26,9 @@ void main() async {
       ),
       BlocProvider(
         create: (_) => getIt<ChatRoomBloc>(),
+      ),
+      BlocProvider(
+        create: (_) => getIt<MessageBloc>(),
       ),
     ],
     child: const MyApp(),
